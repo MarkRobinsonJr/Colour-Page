@@ -1,0 +1,75 @@
+:root {
+}
+:root {
+}
+
+html {
+    background-color: var(--main-colour, white);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI';
+    }
+
+#rgbInput {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.rgbValue {
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    color: var(--accent-colour, black);
+    border: none; outline: none;
+    background-color: var(--main-colour, white);
+}
+
+/* Remove arrows from input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+/* Remove arrows from input */
+
+div.colourBar {
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+a.colourBar {
+    height: 100px;
+    width: 100px;
+    border: 1px solid var(--accent-colour, black);
+}
+
+.colourBar.one {
+    background-color: var(--colourBar-one, white);
+}
+
+.colourBar.two {
+    background-color: var(--colourBar-two, white);
+}
+
+.colourBar.three {
+    background-color: var(--colourBar-three, white);
+}
+
+.colourBar.four {
+    background-color: var(--colourBar-four, white);
+}
+
+.colourBar.five {
+    background-color: var(--colourBar-five, white);
+}
