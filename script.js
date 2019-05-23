@@ -17,7 +17,7 @@ let counterTwo = 0;
 // Create Colour Class
 class colour {
     constructor(vari,r,g,b) {
-        this._var = vari;
+        this._vari = vari;
         this._r = r;
         this._g = g;
         this._b = b;
@@ -26,10 +26,24 @@ class colour {
     get colourCode() {
         return `${this._r},${this._g},${this._b}`;
     }
+    get _red() {
+        return this._r;
+    }
+    get _green() {
+        return this._g;
+    }
+    get _blue() {
+        return this._b;
+    }
+    get _var() {
+        return this._vari;
+    }
 };
 
 // Main
-let mainRGB = new colour('--main-colour',parseFloat(red.value),parseFloat(green.value),parseFloat(blue.value));
+function getMainColour() {
+    return mainRGB = new colour('--main-colour',parseFloat(red.value),parseFloat(green.value),parseFloat(blue.value));
+};
 // cb = colour bar
 let cbOne = new colour('--colourBar-one',255,255,255);
 let cbTwo = new colour('--colourBar-two',255,255,255);
@@ -44,9 +58,11 @@ function changeBackground(){
     style.deleteRule(0);
     };
 
-    let r = colour.mainRGB._r;
-    let g = colour.mainRGB._g;
-    let b = colour.mainRGB._b;
+    getMainColour();
+
+    let r = mainRGB._red;
+    let g = mainRGB._green;
+    let b = mainRGB._blue;
     let accentColour = "white";
 
     if(r+g+b <= 600){
@@ -62,19 +78,19 @@ function changeBackground(){
 };
 
 function makeColourOne(){
-    makeColour(colour.cbOne);
+    makeColour(cbOne);
 };
 function makeColourTwo(){
-    makeColour(colour.cbTwo);
+    makeColour(cbTwo);
 };
 function makeColourThree(){
-    makeColour(colour.cbThree);
+    makeColour(cbThree);
 };
 function makeColourFour(){
-    makeColour(colour.cbFour);
+    makeColour(cbFour);
 };
 function makeColourFive(){
-    makeColour(colour.cbFive);
+    makeColour(cbFive);
 };
 
 //Colour Bar Function
@@ -84,16 +100,17 @@ function makeColour(boxVar) {
     style.deleteRule(1);
     };
     
-    boxVar._r = colour.mainRGB._r;
-    boxVar._g = colour.mainRGB._g;
-    boxVar._b = colour.mainRGB._b;
+    getMainColour();
 
-    let stringThree = ':root {'+colour.cbOne._var+': rgb('+colour.cbOne.colourCode+');'+colour.cbTwo._var+': rgb('+colour.cbTwo.colourCode+');'+colour.cbThree._var+': rgb('+colour.cbThree.colourCode+');'+colour.cbFour._var+': rgb('+colour.cbFour.colourCode+');'+colour.cbFive._var+': rgb('+colour.cbFive.colourCode+');}';
+    boxVar._r = mainRGB._r;
+    boxVar._g = mainRGB._g;
+    boxVar._b = mainRGB._b;
+
+    let stringThree = ':root {'+cbOne._var+': rgb('+cbOne.colourCode+'); '+cbTwo._var+': rgb('+cbTwo.colourCode+'); '+cbThree._var+': rgb('+cbThree.colourCode+'); '+cbFour._var+': rgb('+cbFour.colourCode+'); '+cbFive._var+': rgb('+cbFive.colourCode+'); }';
     
     style.insertRule(stringThree,1);
 
     counterTwo ++
-    console.log("Hello World!");
 };
 
 //Main Listener
