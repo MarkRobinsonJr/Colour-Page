@@ -14,14 +14,28 @@ let colourBarFive = document.querySelector("a.colourBar.five");
 let counter = 0;
 let counterTwo = 0;
 
-let colourList = [[255,255,255],[255,255,255],[255,255,255],[255,255,255],[255,255,255]];
+// Create Colour Class
+class colour {
+    constructor(vari,r,g,b) {
+        this._var = vari;
+        this._r = r;
+        this._g = g;
+        this._b = b;
+    }
 
-function newFunction() {
-    let r = parseFloat(red.value);
-    let g = parseFloat(green.value);
-    let b = parseFloat(blue.value);
-    return { r, g, b };
+    get colourCode() {
+        return `${this._r},${this._g},${this._b}`;
+    }
 };
+
+// Main
+let mainRGB = new colour('--main-colour',parseFloat(red.value),parseFloat(green.value),parseFloat(blue.value));
+// cb = colour bar
+let cbOne = new colour('--colourBar-one',255,255,255);
+let cbTwo = new colour('--colourBar-two',255,255,255);
+let cbThree = new colour('--colourBar-three',255,255,255);
+let cbFour = new colour('--colourBar-four',255,255,255);
+let cbFive = new colour('--colourBar-five',255,255,255);
 
 //Main Function
 function changeBackground(){
@@ -30,8 +44,10 @@ function changeBackground(){
     style.deleteRule(0);
     };
 
+    let r = colour.mainRGB._r;
+    let g = colour.mainRGB._g;
+    let b = colour.mainRGB._b;
     let accentColour = "white";
-    let { r, g, b } = newFunction();
 
     if(r+g+b <= 600){
         accentColour = "white";
@@ -46,36 +62,38 @@ function changeBackground(){
 };
 
 function makeColourOne(){
-    makeColour(0);
+    makeColour(colour.cbOne);
 };
 function makeColourTwo(){
-    makeColour(1);
+    makeColour(colour.cbTwo);
 };
 function makeColourThree(){
-    makeColour(2);
+    makeColour(colour.cbThree);
 };
 function makeColourFour(){
-    makeColour(3);
+    makeColour(colour.cbFour);
 };
 function makeColourFive(){
-    makeColour(4);
+    makeColour(colour.cbFive);
 };
 
 //Colour Bar Function
-function makeColour(boxNumber) {
+function makeColour(boxVar) {
     if(counterTwo == 0) {
     } else {
     style.deleteRule(1);
     };
-    let { r, g, b } = newFunction();
+    
+    boxVar._r = colour.mainRGB._r;
+    boxVar._g = colour.mainRGB._g;
+    boxVar._b = colour.mainRGB._b;
 
-    let arrayOne = [r,g,b];
-    colourList[boxNumber] = arrayOne;
-
-    let stringThree = ':root {--colourBar-one: rgb('+colourList[0].join()+'); --colourBar-two: rgb('+colourList[1].join()+'); --colourBar-three: rgb('+colourList[2].join()+'); --colourBar-four: rgb('+colourList[3].join()+'); --colourBar-five: rgb('+colourList[4].join()+'); }';
+    let stringThree = ':root {'+colour.cbOne._var+': rgb('+colour.cbOne.colourCode+');'+colour.cbTwo._var+': rgb('+colour.cbTwo.colourCode+');'+colour.cbThree._var+': rgb('+colour.cbThree.colourCode+');'+colour.cbFour._var+': rgb('+colour.cbFour.colourCode+');'+colour.cbFive._var+': rgb('+colour.cbFive.colourCode+');}';
+    
     style.insertRule(stringThree,1);
 
     counterTwo ++
+    console.log("Hello World!");
 };
 
 //Main Listener
