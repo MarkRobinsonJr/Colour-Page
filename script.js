@@ -109,7 +109,7 @@ function makeColour(boxVar) {
     let stringThree = ':root {'+cbOne._var+': rgb('+cbOne.colourCode+'); '+cbTwo._var+': rgb('+cbTwo.colourCode+'); '+cbThree._var+': rgb('+cbThree.colourCode+'); '+cbFour._var+': rgb('+cbFour.colourCode+'); '+cbFive._var+': rgb('+cbFive.colourCode+'); }';
     
     style.insertRule(stringThree,1);
-
+    
     counterTwo ++
 };
 
